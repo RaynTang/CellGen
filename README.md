@@ -1,3 +1,5 @@
+简体中文 | [English](README_EN.md)
+
 # Technical Document
 
 医学图像分割算法能够从自动特定组织图像中提取关键信息，免除了临床上手工勾画医学图像所耗费的巨额时间，从而成为学者们研究的热点。针对现有医学图像分割算法衡量分割性能时需要高精度标注的细胞数据集作为支撑，而人工标注的细胞不可避免地存在误差，不利于模型的泛化这一问题，本方法提出一种基于条件生成对抗网络的细胞生成方法。首先利用StyleGAN3网络训练细胞的掩膜（Mask）得到可以控制风格（Style）信息的Mask图像，然后通过Pix2PixHD网络训练特征，并将上一步得到的Mask图片作为输入，得到完全符合语义信息的细胞图片。最后，本方法将得到的细胞图像输入到现有医学图像分割算法中衡量模型的性能，真实地反应出各算法之间的优劣。
@@ -124,7 +126,9 @@ python test.py --name cell --label_nc 0 --no_instance --which_epoch 80 --how_man
 
 ### 2.4 Details
 
-在Pix2pixHD中你可以同时训练您的细胞图像以及荧光点图像
+在Pix2pixHD中你可以同时训练您的细胞图像以及荧光点图像，荧光点的Mask可以通过二维高斯分布生成，我们在`Tools/Points.py`中提供了此功能。
+
+
 
 
 
@@ -226,6 +230,8 @@ U2 -Net 的架构是一个两级嵌套的 U 结构。
 ## 4.Tips
 
 如果您使用Windows运行代码，您需要首先安装Visual Studio，安装C++桌面开发的库。并且配置VS的环境变量Path、LIB和INCLUDE，它们的内容可能是：
+
+![visual_studio_1](D:\Project\Cell_generation_pipeline\Docs\imgs\visual_studio_1.png)
 
 - Path=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;
 
