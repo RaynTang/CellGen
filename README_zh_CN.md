@@ -104,7 +104,6 @@ python train.py --name cell--label_nc 0 --dataroot ./your/data/path/ --no_instan
 - 如果你想用自己的数据集进行训练，请生成单通道的标签图，其像素值与物体标签相对应（即0,1,...,N-1，其中N是标签的数量）。这是因为我们需要从标签图中生成one-hot向量。在训练和测试过程中，也请标明`--label_nc N`。
 - 如果你的输入不是标签图，请直接指定`--label_nc 0`，这将直接使用RGB颜色作为输入。然后文件夹应该命名为`train_A`，`train_B`，而不是`train_label`，`train_img`，目标是将图像从A转化成B。
 - 如果你没有实例信息或不想使用它们，请指定`--no_instance`。
-- The default setting for preprocessing is `scale_width`, which will scale the width of all training images to `opt.loadSize` (1024) while keeping the aspect ratio. If you want a different setting, please change it by using the `--resize_or_crop` option. For example, `scale_width_and_crop` first resizes the image to have width `opt.loadSize` and then does random cropping of size `(opt.fineSize, opt.fineSize)`. `crop` skips the resizing step and only performs random cropping. If you don't want any preprocessing, please specify `none`, which will do nothing other than making sure the image is divisible by 32.
 - 预处理的默认设置是`scale_width`，它将把所有训练图像的宽度扩展到`opt.loadSize`（1024），同时保持长宽比。如果你想要不同的设置，请使用`--resize_or_crop`选项来变更设置。例如，用`scale_width_and_crop`首先调整图像的大小，使其具有`opt.loadSize`的宽度，然后进行`（opt.fineSize, opt.fineSize）`随机裁剪。`crop`跳过调整大小的步骤，只进行随机裁剪。如果你不需要任何预处理，请指定`none`，它除了确保图像能被32整除外将不进行额外的操作。
 
 ### 2.3 Testing
