@@ -1,16 +1,16 @@
 简体中文 | [English](README.md)
 
-# Technical Document
+# Fluorescent Cell Generation Document
 
 医学图像分割算法能够从自动特定组织图像中提取关键信息，免除了临床上手工勾画医学图像所耗费的巨额时间，从而成为学者们研究的热点。针对现有医学图像分割算法衡量分割性能时需要高精度标注的细胞数据集作为支撑，而人工标注的细胞不可避免地存在误差，不利于模型的泛化这一问题，本方法提出一种基于条件生成对抗网络的细胞生成方法。首先利用StyleGAN3网络训练细胞的掩膜（Mask）得到可以控制风格（Style）信息的Mask图像，然后通过Pix2PixHD网络训练特征，并将上一步得到的Mask图片作为输入，得到完全符合语义信息的细胞图片。最后，本方法将得到的细胞图像输入到现有医学图像分割算法中衡量模型的性能，真实地反应出各算法之间的优劣。
 
-在图片生成的过程中采用了Stylegan3, pix2pixHD模型，具体技术细节如下：
+在图片生成的过程中采用了StyleGAN3, pix2pixHD模型，具体技术细节如下：
 
 
 
 ## Requirements
 
-- 支持 Linux 和 Windows 操作系统，但基于性能和兼容性的考虑，我们建议使用 Linux 操作系统。
+- 支持 Linux 和 Windows 操作系统，但基于性能和兼容性的考虑，建议使用 Linux 操作系统运行该项目。
 - 要求至少 1 至 8 个高端 NVIDIA 显卡，每个显卡至少拥有 12 GB 的内存。
 - 要求使用 64 位 Python 3.8 和 PyTorch 1.12.0 或以上版本。请参阅 [https://pytorch.org](https://pytorch.org/) 获取 PyTorch 的安装说明。同时需要安装 CUDA toolkit 11.6 或以上版本。
 - 对于 Linux 系统，需要 GCC 7 或以上版本的编译器；对于 Windows 系统，需要使用 Visual Studio 编译器。建议的 GCC 版本取决于 CUDA 版本，例如 [CUDA 11.6 系统要求](https://docs.nvidia.com/cuda/archive/11.6.0/cuda-installation-guide-linux/index.html#system-requirements)。
@@ -141,9 +141,9 @@ stretched_gaussian = np.dot(np.random.randn(n_samples, 2), C)
 
 ## 3.Image Segmentation
 
-在这一步，我们使用生成的数据集来比较各分割算法的性能。
+在这个阶段，我们将使用生成的数据集来比较各种分割算法的性能。这个过程涉及将生成的数据集输入到不同的分割算法中，然后评估它们的表现和效果。通过比较不同的算法，我们可以找到最适合特定任务的分割算法，这可以帮助我们在实际应用中提高分割的准确性和效率。这样做可以减少人工分割的工作量，并且可以加快分析大量数据的速度，同时也有助于发现一些隐藏在数据中的模式和结构。最终，这个过程有望提高我们对数据的理解和认识，为进一步的研究和应用奠定基础。
 
-### 3.1 Cellpose
+### 3.1 [Cellpose](https://www.cellpose.org/)
 
 传统的分水岭方法对于有明确边界的对象能够取得较好的分割效果，因为该算法能形成一个个小的“盆地”，这些盆地就代表一个个对象。但是，大多数情形下，不同的对象形成不同“深度”（强度）的盆地，很难统一进行分割。因此，创建一个关于对象的中间表达Intermediate Representation，来形成统一的拓扑盆地，就是一个很好的方法。Cellpose做的就是对Mask进行模拟扩散Simulated Diffusion，形成一个矢量场的拓扑映射。
 
@@ -197,7 +197,7 @@ masks, flows, styles, diams = model.eval(imgs, diameter=None, channels=[0,0],
 
 ### 3.2 Cellpofiler
 
-CellProfier是由哈佛和MIT的Broad Institute开发的一款免费软件，旨在让生物学家无需计算机视觉或编程方面的培训，即可自动定量测量数千张图像的表型。
+[CellProfiler](https://cellprofiler.org/)是由哈佛和MIT的Broad Institute开发的一款免费软件，旨在让生物学家无需计算机视觉或编程方面的培训，即可自动定量测量数千张图像的表型。
 
 ### 3.3 Deepcell
 

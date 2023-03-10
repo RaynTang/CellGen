@@ -1,6 +1,6 @@
 English | [简体中文](README_zh_CN.md)
 
-# Technical Document
+# Fluorescent Cell Generation Document
 
 Medical image segmentation algorithms can extract key information from automatically generated images of specific tissues, eliminating the enormous amount of time spent manually drawing medical images in clinical settings, and thus becoming a hot research topic for scholars. However, the problem with evaluating segmentation performance of existing medical image segmentation algorithms is that they require high-precision annotated cell datasets as support, but manually annotated cells inevitably contain errors, which is not conducive to model generalization. To address this issue, this method proposes a cell generation method based on conditional generative adversarial networks.
 
@@ -133,7 +133,9 @@ Input the generated fluorescent point mask into the trained Pix2PixHD fluorescen
 
 ## 3.Image Segmentation
 
-### 3.1 Cellpose
+At this stage, we will use the generated dataset to compare the performance of various segmentation algorithms. This process involves inputting the generated dataset into different segmentation algorithms and evaluating their performance and effectiveness. By comparing different algorithms, we can find the segmentation algorithm that is most suitable for a specific task, which can help us improve the accuracy and efficiency of segmentation in practical applications. This can reduce the workload of manual segmentation, speed up the analysis of large amounts of data, and help discover hidden patterns and structures in the data. Ultimately, this process is expected to improve our understanding and knowledge of the data, laying the foundation for further research and applications.
+
+### 3.1 [Cellpose](https://www.cellpose.org/)
 
 The traditional watershed method can achieve good segmentation results for objects with clear boundaries, as the algorithm can form small "basins" that represent individual objects. However, in most cases, different objects form basins with varying depths (intensities), making it difficult to perform unified segmentation. Therefore, creating an Intermediate Representation (IR) about objects to form a unified topological basin is a good approach. Cellpose uses Simulated Diffusion to simulate the spread of the mask and form a topological map of the vector field. 
 
