@@ -97,6 +97,8 @@ pix2pixHD可以实现高分辨率图像生成和图片的语义编辑。从语�
 python train.py --name cell--label_nc 0 --dataroot ./your/data/path/ --no_instance
 ```
 
+要查看训练结果，请在 `./checkpoints/cell/web/index.html` 中查看中间结果。 如果您已安装了tensorflow，则可以通过在训练脚本中添加 `--tf_log` 来查看 `./checkpoints/cell/logs` 中的tensorboard日志
+
 #### Training with your own dataset
 
 - 如果你想用自己的数据集进行训练，请生成单通道的标签图，其像素值与物体标签相对应（即0,1,...,N-1，其中N是标签的数量）。这是因为我们需要从标签图中生成one-hot向量。在训练和测试过程中，也请标明`--label_nc N`。
@@ -114,11 +116,21 @@ python test.py --name cell --label_nc 0 --no_instance --which_epoch 80 --how_man
 
 ### 2.4 Details
 
-在Pix2pixHD中你可以同时训练您的细胞图像以及荧光点图像，荧光点的Mask可以通过二维高斯分布生成，我们在`Tools/Points.py`中提供了此功能。
+由于荧光点的信号往往非常弱，因此荧光细胞图像中荧光点的生成和分析是非常困难的。直接利用Pix2PixHD 网络难以生成真实的荧光点。
 
+但是在Pix2pixHD中你可以同时训练您的细胞图像以及荧光点图像，荧光点的Mask可以通过二维高斯分布生成，我们在`Tools/Points.py`中提供了此功能。
 
+- $x_i$和$y_i$是为二维高斯数据的中心点；
+- 如果你的细胞图像偏圆形，您可以使用`shifted_gaussian = np.random.randn(n_samples, 2)`来生成您的数据点；
+- 如果您的细胞图像偏扁状，你可以使用：
 
+```python
+# generate zero centered stretched Gaussian data
+C = np.array([[-5, 2], [5, 0]])
+stretched_gaussian = np.dot(np.random.randn(n_samples, 2), C)
+```
 
+将生成的荧光点Mask输入到训练好的Pix2PixHD荧光点生成模型生成逼真的荧光点图像，随后您可以通过`Tools/Combine.py`将荧光图像与荧光点叠加。
 
 ### 2.5 More Training/Test Details
 
