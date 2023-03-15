@@ -2,8 +2,6 @@
 
 ---
 
-English | [简体中文](README_zh_CN.md)
-
 # Fluorescent Cell Generation Document
 
 Medical image segmentation algorithms can extract key information from automatically generated images of specific tissues, eliminating the enormous amount of time spent manually drawing medical images in clinical settings, and thus becoming a hot research topic for scholars. However, the problem with evaluating segmentation performance of existing medical image segmentation algorithms is that they require high-precision annotated cell datasets as support, but manually annotated cells inevitably contain errors, which is not conducive to model generalization. To address this issue, this method proposes a cell generation method based on conditional generative adversarial networks.
@@ -103,7 +101,7 @@ Generally speaking, smaller values of gamma lead to more stable training results
 
 
 
-​              <img src="./Docs/imgs/mask_1.gif" alt="mask" style="zoom:80%;" />    <img src="./Docs/imgs/mask_2.gif" alt="mask" style="zoom:40%;" />
+​                                  <img src="./Docs/imgs/mask_1.gif" alt="mask" style="zoom:64%;" />    <img src="./Docs/imgs/mask_2.gif" alt="mask" style="zoom:32%;" />
 
 <img src="./Docs/imgs/mask_0.png" alt="mask"  />
 
