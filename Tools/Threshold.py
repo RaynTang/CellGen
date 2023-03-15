@@ -10,15 +10,15 @@ def binarize(image_path, threshold):
     return image
 
 # 定义输入输出文件夹
-input_folder = r'D:\Project\Cell generation pipeline\out'
-output_folder = './output_folder'
+input_folder = r'D:\Project\stylegan3-main\test_results\2023.03\4609'
+output_folder = r'D:\Project\stylegan3-main\test_results\Threshold\4609'
 
 # 创建输出文件夹（如果不存在）
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
 # 定义二值化阈值（可以根据需要进行调整）
-threshold = 250
+threshold = 240
 
 # 循环遍历输入文件夹中的所有图片文件
 for filename in os.listdir(input_folder):
