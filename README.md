@@ -101,7 +101,7 @@ Generally speaking, smaller values of gamma lead to more stable training results
 
 
 
-​                                  <img src="./Docs/imgs/mask_1.gif" alt="mask" style="zoom:64%;" />    <img src="./Docs/imgs/mask_2.gif" alt="mask" style="zoom:32%;" />
+​                                                   <img src="./Docs/imgs/mask_1.gif" alt="mask" style="zoom:50%;" />    <img src="./Docs/imgs/mask_2.gif" alt="mask" style="zoom:50%;" />
 
 <img src="./Docs/imgs/mask_0.png" alt="mask"  />
 
